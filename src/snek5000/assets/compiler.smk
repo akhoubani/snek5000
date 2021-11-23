@@ -18,7 +18,10 @@ rule show_config:
 rule build_third_party:
     input:
         # ".state",
-        config["file"],
+        # If we mark the config file as an input of build_third_party
+        # they are rebuild for each simulation.
+        # This leads to random errors when simulations run simultaneously
+        # config["file"],
         nekconfig=NEK_SOURCE_ROOT + "/bin/nekconfig",
     output:
         NEK_SOURCE_ROOT + "/3rd_party/gslib/lib/libgs.a",
